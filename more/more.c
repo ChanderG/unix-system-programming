@@ -11,7 +11,7 @@
 void do_more_of(FILE* fp);
 
 //get user input
-int get_user_intput();
+int get_user_intput(FILE *fp);
 
 int main(int argc, char *argv[]){
   FILE *fp;
@@ -37,10 +37,13 @@ void do_more_of(FILE* fp){
   int no_of_lines = SCREEN_SIZE;
   int getmore = 1;
   int reply;
+  FILE *fp_tty = fopen("/dev/tty", "r");
+
+  if(fp_tty == NULL) exit(1);
 
   while(getmore && fgets(line, LINELEN, fp)){
     if(no_of_lines == 0){
-      reply = get_user_intput();
+      reply = get_user_intput(fp_tty);
       switch(reply){
         case SPACEBAR: no_of_lines = SCREEN_SIZE;
 	               break;
@@ -57,10 +60,10 @@ void do_more_of(FILE* fp){
   return;
 }
 
-int get_user_intput(){
+int get_user_intput(FILE *fp){
   int c;
   printf("\033[7m more? \033[m");
-  while((c = getchar()) != EOF) 
+  while((c = fgetc(fp)) != EOF) 
     switch(c){
       case ' ' : return SPACEBAR;
       case 'q' : return QUIT;
