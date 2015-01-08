@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<utmp.h>  //for utmp related work
 #include<fcntl.h> //for open
+#include<time.h>
 
 void main(){
   struct utmp utmp_record; 
@@ -30,8 +31,10 @@ void main(){
     }  
     else if(status == size_utmp_record){
       //actual work here
-      if(utmp_record.ut_type == USER_PROCESS)
-	printf("%s\t%s\n", utmp_record.ut_user, utmp_record.ut_line);
+      if(utmp_record.ut_type == USER_PROCESS){
+	printf("%s %12s", utmp_record.ut_user, utmp_record.ut_line);
+	printf("\t%12.12s\n", ctime(&utmp_record.ut_time) + 4);
+      }
     }
   }
 
