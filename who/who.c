@@ -30,7 +30,8 @@ void main(){
     }  
     else if(status == size_utmp_record){
       //actual work here
-      printf("%s\t%s\n", utmp_record.ut_user, utmp_record.ut_line);
+      if(utmp_record.ut_type == USER_PROCESS)
+	printf("%s\t%s\n", utmp_record.ut_user, utmp_record.ut_line);
     }
   }
 
