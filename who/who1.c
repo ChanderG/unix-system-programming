@@ -11,7 +11,7 @@ void main(){
   setutent();
 
   while(1){
-    utmp_record = getutent();
+    utmp_record = getutent_r();
 
     if(utmp_record == NULL){
       break;
