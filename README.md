@@ -8,5 +8,7 @@ Following the set of excellent notes on Unix system programming by Stewart Weiss
 more
 who: 0.Brute force implementation
      1.Using getutent
+cp:  0.Simple read - write     
+     1.Using mmap
 
 
